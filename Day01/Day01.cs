@@ -16,12 +16,9 @@ public class Day01
 
 			var lineValue = string.Join("", nums.First(), nums.Last());
 			lineValues.Add(int.Parse(lineValue));
-
-			// See the value of each line:
-			// Console.WriteLine("Line {0,4}: {1}", i + 1, lineValue);
 		};
 
-		Console.WriteLine($"[Part 1] Sum of lines: {lineValues.Sum()}");
+		Console.WriteLine($"[Part 1] Answer: {lineValues.Sum()}");
 	}
 
 	public static void SolvePart2()
@@ -74,11 +71,8 @@ public class Day01
 
 			var lineValue = string.Join("", nums.First(), nums.Last());
 			lineValues.Add(int.Parse(lineValue));
-
-			// See the value of each line:
-			// Console.WriteLine("Line {0,4}: {1}", i + 1, lineValue);
 		}
 
-		Console.WriteLine($"[Part 2] Sum of lines: {lineValues.Sum()}");
+		Console.WriteLine($"[Part 2] Answer: {lineValues.Sum()}");
 	}
 }

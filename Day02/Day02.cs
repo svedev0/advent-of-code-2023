@@ -42,7 +42,7 @@ public class Day02
 			}
 		}
 
-		Console.WriteLine($"Sum of possible games: {possibleGames.Sum()}");
+		Console.WriteLine($"[Part 1] Answer: {possibleGames.Sum()}");
 	}
 
 	public static void SolvePart2()
@@ -76,6 +76,6 @@ public class Day02
 			gamePowers.Add(gameMax["red"] * gameMax["green"] * gameMax["blue"]);
 		}
 
-		Console.WriteLine($"Sum of power of games: {gamePowers.Sum()}");
+		Console.WriteLine($"[Part 2] Answer: {gamePowers.Sum()}");
 	}
 }
