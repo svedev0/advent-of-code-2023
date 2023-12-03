@@ -81,4 +81,65 @@ public class Day03
 
 		Console.WriteLine($"[Part 1] Answer: {sum}");
 	}
+
+	public static void SolvePart2()
+	{
+		string[] input = File.ReadAllLines("Day03\\input.txt");
+
+		List<Number> nums = [];
+		List<Symbol> syms = [];
+
+		for (int row = 0; row < input.Length; row++)
+		{
+			Number currNum = new();
+			List<int> digits = [];
+
+			for (int col = 0; col < input[row].Length; col++)
+			{
+				if (input[row][col] == '.')
+				{
+					continue;
+				}
+
+				if (int.TryParse($"{input[row][col]}", out var digit))
+				{
+					digits.Add(digit);
+
+					if (digits.Count == 1)
+					{
+						currNum.Start = (row, col);
+					}
+
+					while (col < input[row].Length - 1 &&
+						int.TryParse($"{input[row][col + 1]}", out digit))
+					{
+						digits.Add(digit);
+						col++;
+					}
+
+					currNum.End = (row, col);
+					currNum.Value = int.Parse(string.Join("", digits));
+					nums.Add(currNum);
+					currNum = new Number();
+					digits.Clear();
+				}
+				else
+				{
+					syms.Add(new Symbol
+					{
+						Value = input[row][col],
+						Pos = (row, col)
+					});
+				}
+			}
+		}
+
+		int sum = syms
+			.Where(sym => sym.Value == '*')
+			.Select(sym => nums.Where(num => IsAdjacent(num, sym)).ToArray())
+			.Where(gears => gears.Length == 2)
+			.Sum(gears => gears[0].Value * gears[1].Value);
+
+		Console.WriteLine($"[Part 2] Answer: {sum}");
+	}
 }
