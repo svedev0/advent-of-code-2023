@@ -44,4 +44,43 @@ public class Day04
 
 		Console.WriteLine($"[Part 1] Answer: {totalScore}");
 	}
+	
+	public static void SolvePart2()
+	{
+		List<string> input = [.. File.ReadAllLines("Day04\\input.txt")];
+		List<Card> cards = [];
+
+		for (int i = 0; i < input.Count; i++)
+		{
+			int cardNum = int.Parse(input[i].Split(':')[0].Split(" ").Last());
+
+			string[] rowData = input[i].Split(':')[1].Split(" | ");
+			string winningNumsStr = rowData[0].Replace("  ", " ").Trim();
+			string actualNumsStr = rowData[1].Replace("  ", " ").Trim();
+
+			cards.Add(new()
+			{
+				Number = cardNum,
+				Winning = [.. winningNumsStr.Split(" ").Select(int.Parse)],
+				Actual = [.. actualNumsStr.Split(" ").Select(int.Parse)],
+			});
+		}
+
+		List<int> counts = [.. cards.Select(_ => 1)];
+
+		for (int i = 0; i < cards.Count; i++)
+		{
+			IEnumerable<int> intersecting = cards[i].Actual
+				.Intersect(cards[i].Winning);
+
+			var (card, count) = (cards[i], counts[i]);
+
+			for (int j = 0; j < intersecting.Count(); j++)
+			{
+				counts[i + j + 1] += count;
+			}
+		}
+
+		Console.WriteLine($"[Part 2] Answer: {counts.Sum()}");
+	}
 }

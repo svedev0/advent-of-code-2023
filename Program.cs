@@ -25,6 +25,7 @@ public class Program
 				break;
 			case 4:
 				Day04.SolvePart1();
+				Day04.SolvePart2();
 				break;
 			default:
 				Console.WriteLine("Invalid day");
