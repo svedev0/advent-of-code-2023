@@ -3,7 +3,7 @@
 public class Program
 {
 	private static readonly int YEAR = 2023;
-	private static readonly int DAY = 3;
+	private static readonly int DAY = 4;
 
 	public static void Main(string[] _)
 	{
@@ -22,6 +22,9 @@ public class Program
 			case 3:
 				Day03.SolvePart1();
 				Day03.SolvePart2();
+				break;
+			case 4:
+				Day04.SolvePart1();
 				break;
 			default:
 				Console.WriteLine("Invalid day");
