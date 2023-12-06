@@ -31,4 +31,24 @@ public class Day06
 
 		Console.WriteLine($"[Part 1] Answer: {marginOfError}");
 	}
+
+	public static void SolvePart2()
+	{
+		List<string> input = [.. File.ReadAllLines("Day06\\input.txt")];
+
+		long time = long.Parse(input[0].Split(':')[1].Trim().Replace(" ", ""));
+		long dist = long.Parse(input[1].Split(':')[1].Trim().Replace(" ", ""));
+
+		long marginOfError = 0;
+
+		for (long i = 0; i < time; i++)
+		{
+			if (i * (time - i) > dist)
+			{
+				marginOfError++;
+			}
+		}
+
+		Console.WriteLine($"[Part 2] Answer: {marginOfError}");
+	}
 }

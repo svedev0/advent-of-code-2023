@@ -33,6 +33,7 @@ public class Program
 				break;
 			case 6:
 				Day06.SolvePart1();
+				Day06.SolvePart2();
 				break;
 			default:
 				Console.WriteLine("Invalid day");
