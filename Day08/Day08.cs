@@ -38,6 +38,57 @@ public class Day08
 		Console.WriteLine($"[Part 1] Answer: {movesMade}");
 	}
 
+	public static void SolvePart2()
+	{
+		List<string> input = [.. File.ReadAllLines("Day08\\input.txt")];
+
+		string moves = input[0];
+		Dictionary<string, (string l, string r)> nodes = [];
+
+		foreach (var node in input.Skip(2))
+		{
+			var (curr, l, r) = ParseNode(node);
+			nodes[curr] = (l, r);
+		}
+
+		int currMove = 0;
+		List<string> startNodes = [.. nodes.Keys.Where(key => key[2] == 'A')];
+		long result = 1;
+
+		foreach (var node in startNodes)
+		{
+			string next = node;
+			long movesMade = 0;
+			currMove = 0;
+
+			while (next[2] != 'Z')
+			{
+				next = moves[currMove] == 'L' ? nodes[next].l : nodes[next].r;
+				
+				currMove++;
+				movesMade++;
+
+				if (currMove == moves.Length)
+				{
+					currMove = 0;
+				}
+			}
+
+			var (greater, smaller) = result > movesMade ?
+				(result, movesMade) :
+				(movesMade, result);
+
+			while (smaller != 0)
+			{
+				(greater, smaller) = (smaller, greater % smaller);
+			}
+
+			result *= (movesMade / greater);
+		}
+
+		Console.WriteLine($"[Part 2] Answer: {result}");
+	}
+
 	private static (string curr, string l, string r) ParseNode(string node)
 	{
 		string cleanNode = node.Replace(" ", "");
