@@ -3,10 +3,13 @@
 public class Program
 {
 	private static readonly int YEAR = 2023;
-	private static readonly int DAY = 22;
+	private static readonly int DAY = 23;
 
 	public static void Main(string[] _)
 	{
+		Timer timer = new();
+		timer.Start();
+
 		Welcome();
 
 		switch (DAY)
@@ -99,10 +102,15 @@ public class Program
 				Day22.SolvePart1();
 				Day22.SolvePart2();
 				break;
-			default:
-				Console.WriteLine("Invalid day");
+			case 23:
+				Day23.SolvePart1();
+				Day23.SolvePart2();
 				break;
+			default:
+				throw new Exception("Invalid day");
 		}
+
+		timer.Stop();
 	}
 
 	private static void Welcome()
@@ -114,5 +122,36 @@ public class Program
 
 			""";
 		Console.WriteLine(messsage);
+	}
+}
+
+public class Timer
+{
+	private DateTime StartTime { get; set; }
+	private DateTime EndTime { get; set; }
+
+	public void Start()
+	{
+		StartTime = DateTime.Now;
+	}
+
+	public string Stop()
+	{
+		EndTime = DateTime.Now;
+		double resultSeconds = (EndTime - StartTime).TotalSeconds;
+		TimeSpan time = TimeSpan.FromSeconds(resultSeconds);
+
+		string result;
+		if (resultSeconds <= 60)
+		{
+			result = string.Format("{0:D2} seconds", time.Seconds);
+		}
+		else
+		{
+			result = string.Format("{0:D2} minutes {1:D2} seconds", time.Minutes, time.Seconds);
+		}
+
+		Console.WriteLine($"The program finished in {result}");
+		return result;
 	}
 }
